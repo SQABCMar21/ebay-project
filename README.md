@@ -1,12 +1,13 @@
-#### Advanced Project
+#### Ebay Project
 
-### April 20, 2016
+### April 28, 2016
 
-An advanced Structure for Maven Java Projects
+An Automation Test for EBay
 
 * Git
 * Java 7
 * Maven
-* Testing Framework
+* Selenium
+* TestNG
 
 [Jean-francois Nepton](http://sqasolution.com)

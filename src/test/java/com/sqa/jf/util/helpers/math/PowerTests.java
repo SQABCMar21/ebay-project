@@ -10,13 +10,11 @@
 
 package com.sqa.jf.util.helpers.math;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import static org.testng.Assert.*;
 
-import com.sqa.jf.util.helpers.MyMath;
+import org.testng.annotations.*;
+
+import com.sqa.jf.util.helpers.*;
 
 /**
  * MyMathTests //ADDD (description of class)
@@ -30,36 +28,24 @@ import com.sqa.jf.util.helpers.MyMath;
  * @since 1.0
  *
  */
-@RunWith(value = Parameterized.class)
+
 public class PowerTests {
 
-	@Parameters
-	public static Object[][] getData() {
+	@DataProvider(name = "Power Data")
+	public static Object[][] getPowerData() {
 		Object[][] data = { { 2.0, 2.0, 4.0 }, { 5.0, 2.0, 25.0 }, { 4.0, 3.0, 64.0 }, { 1.0, 0.0, 1.0 },
 				{ 3.0, 1.0, 3.0 }, { 2.0, 1.5, 3.25 } };
 		return data;
 	}
 
-	private double expectedResult;
-	private double num;
-	private double power;
-
-	public PowerTests(double num, double power, double expectedResult) {
-		super();
-		this.num = num;
-		this.power = power;
-		this.expectedResult = expectedResult;
-	}
-
-	@Test
-	public void testPowerNumbers() {
+	@Test(dataProvider = "Power Data")
+	public void testPowerNumbers(double num, double power, double expectedResult) {
 		double actualResult;
-		double expectedResult = this.expectedResult;
-		double num = this.num;
-		double power = this.power;
 		actualResult = MyMath.powerNumber(num, power);
 		String message = String.format("The result of %.0f to the power of %.0f is %.0f", num, power, actualResult);
 		System.out.println(message);
-		Assert.assertEquals(message, expectedResult, actualResult, 0);
+		// TestNG PArams: Actual, Expected, Delta, Message
+		assertEquals(actualResult, expectedResult, 0, message);
+
 	}
 }

@@ -1,6 +1,6 @@
 package com.sqa.jf.util.helpers;
 
-import org.junit.Test;
+import org.testng.annotations.*;
 
 /**
  *   File Name: AppBasics.java<br>
@@ -33,16 +33,17 @@ public class AppBasicsTests {
 	 * {@link com.sqa.jf.util.helpers.AppBasics#farewellUser(java.lang.String, java.lang.String)}
 	 * .
 	 */
-	@Test
+	@Test(priority = 100)
 	public void testFarewellUser() {
 		AppBasics.farewellUser(userName, appName);
 	}
 
 	/**
 	 * Test method for
-	 * {@link com.sqa.jf.util.helpers.AppBasics#welcomeUserAndGetUsersName(java.lang.String)}.
+	 * {@link com.sqa.jf.util.helpers.AppBasics#welcomeUserAndGetUsersName(java.lang.String)}
+	 * .
 	 */
-	@Test
+	@Test(priority = 0)
 	public void testWelcomeUser() {
 		userName = AppBasics.welcomeUserAndGetUsersName(appName);
 	}

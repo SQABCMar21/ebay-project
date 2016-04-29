@@ -10,15 +10,13 @@
 
 package com.sqa.jf.util.helpers.math;
 
-import java.util.Arrays;
+import static org.testng.Assert.*;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import java.util.*;
 
-import com.sqa.jf.util.helpers.MyMath;
+import org.testng.annotations.*;
+
+import com.sqa.jf.util.helpers.*;
 
 /**
  * MyMathTests //ADDD (description of class)
@@ -32,35 +30,27 @@ import com.sqa.jf.util.helpers.MyMath;
  * @since 1.0
  *
  */
-@RunWith(Parameterized.class)
 public class MultiplicationTests {
 
-	@Parameters
+	@DataProvider(name = "Multiplication Data")
 	public static Object[][] getData() {
-		Object[][] data = { { new double[] { 2.0, 3.0, 4.0, 2.0 }, 50 }, { new double[] { 2.0, 1.0, 5.0 }, 10.0 },
+		Object[][] data = { { new double[] { 2.0, 3.0, 4.0, 2.0 }, 49 }, { new double[] { 2.0, 1.0, 5.0 }, 10.0 },
 				{ new double[] { 3.0, 1.5 }, 4.5 }, { new double[] { 0.0, 5.0, 15.0, 10.0 }, 0.0 },
 				{ new double[] { 1.0, 2.0, 2.5, 3.0, 6.0 }, 90.0 }, { new double[] { 1.5, 5.5, 0.0 }, 0.0 } };
 		return data;
 	}
 
-	private double expectedResult;
-	private double[] numbers;
-
-	public MultiplicationTests(double[] numbers, double expectedResult) {
-		this.numbers = numbers;
-		this.expectedResult = expectedResult;
-	}
-
-	@Test
-	public void testMultiplication() {
-		double actualResult = MyMath.multNumbers(this.numbers);
-		String numbersString = Arrays.toString(this.numbers);
+	@Test(dataProvider = "Multiplication Data")
+	public void testMultiplication(double[] numbers, double expectedResult) {
+		double actualResult = MyMath.multNumbers(numbers);
+		String numbersString = Arrays.toString(numbers);
 		String errorMessage = String.format(
 				"Error: The result of multiplying all numbers %s " + " is actually %.2f not expected.", numbersString,
 				actualResult);
 		String message = String.format("The result of multiplying all numbers %s " + " is %.2f.", numbersString,
 				actualResult);
 		System.out.println(message);
-		Assert.assertEquals(errorMessage, this.expectedResult, actualResult, 2);
+		// TestNG PArams: Actual, Expected, Delta, Message
+		assertEquals(actualResult, expectedResult, 1, errorMessage);
 	}
 }

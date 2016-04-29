@@ -10,7 +10,7 @@
 
 package com.sqa.jf.util.helpers;
 
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * AppBasics //ADDD (description of class)
@@ -36,7 +36,7 @@ public class AppBasics {
 	public static String welcomeUserAndGetUsersName(String appName) {
 		String userName;
 		System.out.println("Welcome to the " + appName + " Application.");
-		userName = RequestInput.getString("Could I get your name please?");
+		userName = RequestInput.getString("Could I get your name please? ");
 		return userName;
 	}
 }
