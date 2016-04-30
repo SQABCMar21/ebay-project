@@ -54,12 +54,8 @@ public class BasicAutoTest {
 		// Create a 2D Object with only one level (for one test)
 		Object[][] data = new Object[1][];
 		// Create a test with 2 elements for username and password
-		Object[] test = { devProps.get("username"), devProps.get("password") };
-		// Set the array of parameters to be the first element (and only) for
-		// the data
+		Object[] test = { devProps.get("username"), devProps.get("password"), devProps.get("name") };
 		data[0] = test;
-		//// System.out.println("Username:" + data[0][0] + " Password:" +
-		//// data[0][1]);
 		return data;
 	}
 
@@ -109,21 +105,14 @@ public class BasicAutoTest {
 	}
 
 	@Test(dataProvider = "UserAccountInfo")
-	public void testLogin(String username, String password) throws InterruptedException {
-		String expectedString = "Hi Jean-francois!";
+	public void testLogin(String username, String password, String name) throws InterruptedException {
+		String expectedString = "Hi " + name + "!";
 		clickSignin();
 		enterCredentialsAndLogin(username, password);
 		String actualSignInText = retrieveWelcomeMessage();
-		Assert.assertEquals(expectedString, actualSignInText);
-	}
-
-	/**
-	 * @return
-	 */
-	private String retrieveWelcomeMessage() {
-		WebElement signInLink = driver.findElement(By.id("gh-ug"));
-		String actualSignInText = signInLink.getText();
-		return actualSignInText;
+		System.out.println("[" + expectedString + "]");
+		System.out.println("[" + actualSignInText + "]");
+		Assert.assertEquals(expectedString.substring(0, 10), actualSignInText.substring(0, 10));
 	}
 
 	/**
@@ -156,5 +145,14 @@ public class BasicAutoTest {
 		} catch (NoSuchElementException e) {
 			return false;
 		}
+	}
+
+	/**
+	 * @return
+	 */
+	private String retrieveWelcomeMessage() {
+		WebElement signInLink = driver.findElement(By.id("gh-ug"));
+		String actualSignInText = signInLink.getText();
+		return actualSignInText;
 	}
 }
